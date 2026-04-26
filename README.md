@@ -142,7 +142,7 @@ Epsylon/
 ¿Interesado en el proyecto o en colaborar?
 
 - 📧 pacoaldev@gmail.com
-- 🌐 [Portfolio](#) *(enlaza aqui tu portfolio)*
+- 🌐 [Portfolio](https://pacoal.dev)
 
 ---
 
