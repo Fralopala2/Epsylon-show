@@ -58,39 +58,49 @@
 
 ---
 
-## 🚀 Características principales
+## 🚀 Características Principales
 
-### 🎤 Interview copilot
-- Transcripcion en tiempo real con cadena STT: Groq → Whisper local → OpenAI Whisper
-- Sugerencias LLM multi-modelo: Gemini, OpenRouter y OpenAI con fallback automatico
-- RAG local: recuperacion automatica de contexto desde base de conocimiento propia (PDF/TXT)
-- Teleprompter remoto con scroll sincronizado
-- **Modo stealth (Ghost):** opacidad ajustable, ocultacion de taskbar, camuflaje del titulo de ventana
-- Hotkeys globales 100% configurables desde la UI sin recompilar
+### 🎤 Interview Copilot (Asistencia en Tiempo Real)
+*   **Transcripción Inteligente Mejorada:** Captura con Groq STT como proveedor principal, fallback local con whisper.cpp y respaldo OpenAI, con contexto reciente para mejorar continuidad en conversación fluida.
+*   **Chunks Optimizados para Voz Natural:** Grabación por fragmentos ajustada para mejorar tasa de acierto en primera transcripción.
+*   **Sugerencias LLM Multi-Modelo (Gemini/OpenRouter/OpenAI):** Selección de proveedor desde UI con prioridad configurable al LLM.
+*   **Recuperación Automática de Contexto (RAG local):** Antes de responder, el backend consulta la base de conocimiento y adjunta los fragmentos más relevantes al prompt.
+*   **Pipeline híbrido robusto (LLM + KB):** Soporta modo `Priorizar LLM` para intentar respuesta generativa primero y degradar a fallback controlado si hay límites/timeout.
+*   **Modo Stealth Avanzado (Ghost):** Interfaz ultra-discreta con opacidad ajustable, ocultación del icono en la barra de tareas y minimización al área de notificación (System Tray). Camuflaje automático del título de la ventana como "System Host Process".
+*   **Detección de Plataforma:** Reconocimiento automático de Zoom, Teams y Google Meet para optimizar el contexto.
+*   **Teleprompter Remoto:** Visor con scroll automático sincronizado y controlable remotamente desde la ventana principal.
+*   **Teleprompter visible en capturas (Windows):** Nuevo check en `Ajustes` para permitir o bloquear la aparición del teleprompter en screenshots/grabaciones de pantalla.
+*   **Hotkeys Globales Configurables en UI:** Edita los atajos desde `Ajustes`, se aplican al instante sin rebuild y quedan persistidos para próximos arranques.
+*   **Hotkeys de audio robustas:** Fallback de ejecución directa desde Tauri para captura/chunks incluso si el bus de eventos del renderer no responde.
+*   **UI 100% en Español:** Etiquetas, mensajes, botones y estados unificados en un único idioma. 
 
-### 🔍 Job search engine
-- Crawlers multi-fuente: LinkedIn, Infojobs, Indeed, Glassdoor, RemoteOK, Adzuna y mas
-- Filtros avanzados por salario, experiencia, ubicacion y modalidad
-- Tracking de candidaturas en SQLite (`Guardado` → `Aplicado` → `Entrevista` → `Rechazado`)
-- Generacion automatica de cartas de presentacion personalizadas por oferta
+### 🔍 Job Search Engine (Búsqueda Automatizada)
+*   **Crawlers Multi-Fuente:** Rastreo en LinkedIn, Infojobs, Indeed, Glassdoor, RemoteOK, Wellfound, Adzuna y más.
+*   **Filtros Avanzados:** Filtra por salario, experiencia, ubicación y modalidad remota.
+*   **Gestión de Candidaturas:** Tracking local en SQLite (`Guardado`, `Aplicado`, `Entrevista`, `Rechazado`).
+*   **Auto-Apply & Outreach:** Generación automática de cartas de presentación y correos de seguimiento personalizados.
+*   **Carta de Presentación por Oferta:** Selección explícita de oferta guardada antes de generar la carta.
 
-### 🧠 Inteligencia avanzada
-- OCR con auto-sugerencia (imagen o portapapeles)
-- TTS para escuchar las sugerencias por auriculares
-- Memoria de entrevista por rol y nivel (Backend, Java, Spring Boot, Full Stack, Mid, Mid-Adv)
-- Dashboard de analiticas de busqueda y exito en entrevistas
+### 💳 Control de Costes API (portal TheirStack)
+*   **Integración TheirStack en Modo Ahorro:** Activación manual desde UI para evitar consumo accidental.
+*   **Tope por Consulta:** Máximo 5 resultados por búsqueda en TheirStack.
+*   **Tope Diario Persistente:** Límite diario configurable de créditos TheirStack (por defecto: 20/día).
+*   **Ventana Temporal Acotada:** Búsquedas TheirStack con antigüedad máxima configurable (`posted_at_max_age_days`).
 
----
+### 🧠 Inteligencia Avanzada
+*   **OCR Inteligente con Auto-Sugerencia:** Soporte mixto `spa+eng` con carga de imágenes o pegado directo desde el portapapeles. Al detectar texto, el sistema dispara automáticamente la generación de sugerencias IA.
+*   **TTS (Text-To-Speech):** Escucha las sugerencias de la IA a través de tus auriculares.
+*   **Memoria de Entrevista por Rol y Nivel:** Base general común + memoria específica para Backend, Java, Spring Boot, Full Stack y niveles Mid / Mid-Adv.
+*   **Base de Conocimiento Local (PDF/TXT):** Ingesta, búsqueda, listado, reindexado y borrado de documentos desde la app.
+*   **Pestaña dedicada de KB:** La gestión de la base de conocimiento vive en una pestaña separada (`Base de conocimiento`) para no saturar `Copiloto`.
+*   **Trazabilidad de contexto:** Las sugerencias pueden devolver `knowledgeHits` para ver qué fragmentos KB se usaron.
+*   **Analíticas:** Visualiza tu progreso con dashboards de búsqueda y éxito en entrevistas.
 
-## 🛠️ Stack tecnologico
-
-| Capa | Tecnologias |
-| :--- | :--- |
-| **Desktop app** | Tauri, React, TypeScript, Vite |
-| **Backend API** | Node.js, Fastify, Zod |
-| **Persistencia** | SQLite (jobs + KB FTS5 + KB Q/A) |
-| **IA / ML** | Groq STT, OpenAI, Anthropic Claude, Google Gemini, OpenRouter, Tesseract.js |
-| **Tooling** | NPM Workspaces, Docker, GitHub Actions |
+### ⚡ Rendimiento y Operación
+*   **Compresión HTTP:** API Fastify con compresión global para respuestas grandes.
+*   **Carga Diferida de OCR:** `tesseract.js` se carga solo cuando se usa OCR (mejor arranque de API).
+*   **Índices en Persistencia Local:** SQLite para jobs + SQLite FTS5 para chunks KB + índice Q/A dedicado para recuperación más precisa.
+*   **Análisis de Bundle Desktop:** Script para inspeccionar tamaño y composición del bundle de renderer.
 
 ---
 
