@@ -60,7 +60,7 @@
 
 ## 🚀 Características Principales
 
-### 🎤 Interview Copilot (Asistencia en Tiempo Real)
+### 🎤 El Copiloto (Asistencia en Tiempo Real)
 *   **Transcripción Inteligente Mejorada:** Captura con Groq STT como proveedor principal, fallback local con whisper.cpp y respaldo OpenAI, con contexto reciente para mejorar continuidad en conversación fluida.
 *   **Chunks Optimizados para Voz Natural:** Grabación por fragmentos ajustada para mejorar tasa de acierto en primera transcripción.
 *   **Sugerencias LLM Multi-Modelo (Gemini/OpenRouter/OpenAI):** Selección de proveedor desde UI con prioridad configurable al LLM.
@@ -74,7 +74,7 @@
 *   **Hotkeys de audio robustas:** Fallback de ejecución directa desde Tauri para captura/chunks incluso si el bus de eventos del renderer no responde.
 *   **UI 100% en Español:** Etiquetas, mensajes, botones y estados unificados en un único idioma. 
 
-### 🔍 Job Search Engine (Búsqueda Automatizada)
+### 🔍 Modulo de Busqueda de Empleo (Búsqueda Automatizada)
 *   **Crawlers Multi-Fuente:** Rastreo en LinkedIn, Infojobs, Indeed, Glassdoor, RemoteOK, Wellfound, Adzuna y más.
 *   **Filtros Avanzados:** Filtra por salario, experiencia, ubicación y modalidad remota.
 *   **Gestión de Candidaturas:** Tracking local en SQLite (`Guardado`, `Aplicado`, `Entrevista`, `Rechazado`).
