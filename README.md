@@ -37,17 +37,17 @@
   <tr>
     <td align="center">
       <img src="./assets/screenshot-copilot.png" alt="Interview Copilot" width="100%">
-      <sub><b>Interview copilot — asistencia en tiempo real</b></sub>
+      <sub><b>El Copiloto — asistencia en tiempo real</b></sub>
     </td>
     <td align="center">
       <img src="./assets/screenshot-jobs.png" alt="Job Search Engine" width="100%">
-      <sub><b>Job search engine — búsqueda automatizada</b></sub>
+      <sub><b>Modulo de Empleos — búsqueda automatizada</b></sub>
     </td>
   </tr>
   <tr>
     <td align="center">
       <img src="./assets/screenshot-kb.png" alt="Base de conocimiento" width="100%">
-      <sub><b>Base de conocimiento — RAG local</b></sub>
+      <sub><b>Base de conocimientos — RAG local</b></sub>
     </td>
     <td align="center">
       <img src="./assets/screenshot-settings.png" alt="Ajustes y hotkeys" width="100%">
