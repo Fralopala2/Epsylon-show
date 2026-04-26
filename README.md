@@ -139,7 +139,7 @@ Epsylon/
 
 ## 📬 Contacto
 
-¿Interesado en el proyecto o en colaborar?
+¿Interesado en el proyecto?
 
 - 📧 pacoaldev@gmail.com
 - 🌐 [Portfolio](https://pacoal.dev)
