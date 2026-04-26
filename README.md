@@ -104,7 +104,7 @@
 
 ---
 
-## 🖼️ Arquitectura del sistema
+## 🖼️ Infograma de Epsylon 
 
 <p align="center">
   <img src="./assets/infografia.png" alt="Diagrama de arquitectura de Epsylon" width="100%">
