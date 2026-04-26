@@ -114,9 +114,11 @@
 
 ## 💡 Por que lo construi
 
-Durante mi busqueda de practicas como desarrollador, el proceso de entrevistas tecnicas me parecia un cuello de botella donde la preparacion previa no era suficiente. Queria una herramienta que combinara gestion de ofertas con asistencia activa, de forma discreta y sin depender de servicios en la nube para lo critico.
+Queria enfrentarme a un proyecto de escritorio real que uniera Tauri, arquitecturas RAG y procesamiento de audio en un mismo entorno, resolviendo un caso de uso exigente: asistir en entrevistas tecnicas en tiempo real sin depender de la nube para lo critico.
 
-Epsylon es el resultado: un proyecto complejo y real que me permitio trabajar con Tauri, sistemas RAG, pipelines de audio y multiples APIs de IA integradas en un monorepo.
+Epsylon nace como una herramienta que combina gestion de ofertas con asistencia inteligente en tiempo real, diseñada para ser discreta, eficiente y con un control estricto sobre donde se ejecuta y almacena cada dato sensible.
+
+Este proyecto no es solo una demo: es un sistema completo donde he trabajado con Tauri, sistemas RAG, pipelines de audio y la integracion de multiples APIs de IA dentro de un monorepo cohesivo.
 
 ---
 
