@@ -152,12 +152,6 @@
 
 ---
 
-<p align="center">
-  <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
-</p>
-
----
-
 ## 🛠️ Stack Tecnológico
 
 Epsylon está construido sobre una arquitectura moderna, escalable y robusta:
