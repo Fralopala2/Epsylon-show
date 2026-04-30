@@ -152,7 +152,6 @@
 
 ---
 
-<!-- SYNC:FEATURES:END -->
 <p align="center">
   <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
 </p>
