@@ -57,7 +57,7 @@
 </table>
 
 ---
-
+<!-- SYNC:FEATURES:START -->
 ## 🚀 Características Principales
 
 ### 🎤 Interview Copilot (Asistencia en Tiempo Real)
@@ -118,7 +118,7 @@
 ---
 
 ## 🖼️ Infografia del Proyecto
-
+<!-- SYNC:FEATURES:END -->
 <p align="center">
   <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
 </p>
