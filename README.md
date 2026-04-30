@@ -74,6 +74,13 @@
 *   **Hotkeys de audio robustas:** Fallback de ejecución directa desde Tauri para captura/chunks incluso si el bus de eventos del renderer no responde.
 *   **UI 100% en Español:** Etiquetas, mensajes, botones y estados unificados en un único idioma. 
 
+### 🎭 Mock Interviews (Simulacros de Entrevista)
+*   **Módulo de Práctica Interactiva:** Pestaña dedicada para realizar entrevistas de prueba con una IA que actúa como reclutador técnico.
+*   **Configuración por Rol y Nivel:** Elige el puesto (ej: Senior Backend) y la empresa (ej: Google) para una experiencia personalizada.
+*   **Sesiones Dinámicas:** Flujo de conversación inteligente que adapta las preguntas según el desempeño del candidato.
+*   **Evaluación y Feedback Detallado:** Al finalizar, recibe una puntuación global y desglosada (técnica, comunicación, confianza) junto con fortalezas y áreas de mejora.
+*   **Historial de Sesiones:** Registra y revisa tus simulacros previos para medir tu progreso en el tiempo.
+
 ### 🔍 Job Search Engine (Búsqueda Automatizada)
 *   **Crawlers Multi-Fuente:** Rastreo en LinkedIn, Infojobs, WeWorkRemotely, DjangoJobs, Adzuna, TheirStack y más.
 *   **Diagnóstico de Crawlers en tiempo real:** Tras cada búsqueda, la UI muestra un badge por fuente indicando cuántas ofertas encontró, si está mal configurada (⚠) o si falló (✗).
@@ -136,9 +143,23 @@
 *   **Análisis de Bundle Desktop:** Script para inspeccionar tamaño y composición del bundle de renderer.
 *   **Observabilidad:** Logs estructurados ultra-rápidos con `pino` y visualización legible en desarrollo con `pino-pretty`.
 *   **Documentación Interactiva:** Endpoints del backend auto-documentados vía Swagger UI (`/docs`).
+*   **Tests Unitarios e Integración:** Suite de pruebas automatizada para componentes críticos, utilidades y servicios del backend, garantizando estabilidad ante cambios.
 *   **CI/CD Automatizado:** Pipeline en GitHub Actions configurado para compilar y publicar releases (Tauri y Backend) de forma inteligente (bajo demanda o por tags) ahorrando minutos de ejecución.
 
 ---
+
+## 🖼️ Infografia del Proyecto
+<!-- SYNC:FEATURES:END -->
+<details>
+  <summary>Ver infografia del proyecto</summary>
+  <br />
+  <p align="center">
+    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
+  </p>
+</details>
+
+---
+
 <!-- SYNC:FEATURES:END -->
 ## 🖼️ Infografia del Proyecto
 
