@@ -58,28 +58,31 @@
 
 ---
 <!-- SYNC:FEATURES:START -->
+
 ## 🚀 Características Principales
 
 ### 🎤 Interview Copilot (Asistencia en Tiempo Real)
-*   **Transcripción Inteligente Mejorada:** Captura con Groq STT como proveedor principal, fallback local con whisper.cpp y respaldo OpenAI, con contexto reciente para mejorar continuidad en conversaciones.
-*   **Chunks Optimizados para Voz Natural:** Grabación por fragmentos ajustada para mejorar tasa de acierto en primera transcripción.
-*   **Sugerencias LLM Multi-Modelo (Gemini/OpenRouter/OpenAI):** Selección de proveedor desde UI con prioridad configurable al LLM.
-*   **Recuperación Automática de Contexto (RAG local):** Antes de responder, el backend consulta la base de conocimiento y adjunta los fragmentos más relevantes al prompt.
-*   **Pipeline híbrido robusto (LLM + KB):** Soporta modo `Priorizar LLM` para intentar respuesta generativa primero y degradar a fallback controlado si hay límites/timeout.
-*   **Modo Stealth Avanzado (Ghost):** Interfaz ultra-discreta con opacidad ajustable, ocultación del icono en la barra de tareas y minimización al área de notificación (System Tray).
-*   **Detección de Plataforma:** Reconocimiento automático de Zoom, Teams y Google Meet para optimizar el contexto.
+*   **Cursor Virtual:** Al activarlo desde Ajustes, el cursor real del sistema queda oculto en capturas de pantalla y grabaciones. Un cursor SVG renderizado en el frontend sigue el movimiento real del ratón, mostrando una posición que puede diferir de la real.
+*   **Click-through Mode (Ghost):** En modo fantasma, el teleprompter mantiene click-through para no robar foco/clics durante la entrevista.
+*   **Navegación de bloques en Ghost sin click:** Las sugerencias del teleprompter pueden recorrerse con hotkeys globales `←/→` incluso cuando la ventana está en click-through.
+*   **Camuflaje de proceso en Windows:** Además del camuflaje de título en modo stealth (`"System Host Process"`), el build aplica metadatos Win32 (`FileDescription`, `ProductName`) al `.exe` para reducir exposición visual en Task Manager. Se aplica sobre el binario release de Tauri y sobre los `.exe` copiados a `release/local|cloud`.
+*   **Detección de Plataforma:** Reconocimiento automático de Zoom, Teams y Google Meet para optimizar el contexto. 
 *   **Teleprompter Remoto:** Visor con scroll automático sincronizado y controlable remotamente desde la ventana principal.
 *   **Teleprompter visible en capturas (Windows):** Nuevo check en `Ajustes` para permitir o bloquear la aparición del teleprompter en screenshots/grabaciones de pantalla.
 *   **Hotkeys Globales Configurables en UI:** Edita los atajos desde `Ajustes`, se aplican al instante sin rebuild y quedan persistidos para próximos arranques.
+*   **Personalización del Copiloto (Inyección avanzada de contexto):** textarea en `Copiloto` que añade “background personal” (criterios, estilo, resumen propio) que el backend mezcla con los hits de KB/roles antes de generar sugerencias.
 *   **Hotkeys de audio robustas:** Fallback de ejecución directa desde Tauri para captura/chunks incluso si el bus de eventos del renderer no responde.
-*   **UI 100% en Español:** Etiquetas, mensajes, botones y estados unificados en un único idioma.
+*   **UI 100% en Español:** Etiquetas, mensajes, botones y estados unificados en un único idioma. 
 
 ### 🔍 Job Search Engine (Búsqueda Automatizada)
-*   **Crawlers Multi-Fuente:** Rastreo en LinkedIn, Infojobs, Indeed, Glassdoor, RemoteOK, Wellfound, Adzuna y más.
-*   **Filtros Avanzados:** Filtra por salario, experiencia, ubicación y modalidad remota.
+*   **Crawlers Multi-Fuente:** Rastreo en LinkedIn, Infojobs, WeWorkRemotely, DjangoJobs, Adzuna, TheirStack y más.
+*   **Diagnóstico de Crawlers en tiempo real:** Tras cada búsqueda, la UI muestra un badge por fuente indicando cuántas ofertas encontró, si está mal configurada (⚠) o si falló (✗).
+*   **Filtros Avanzados:** Filtra por salario, experiencia, ubicación y modalidad remota. El filtro de ubicación reconoce aliases internacionales (España↔Spain, Alemania↔Germany, etc.).
+*   **Hasta 200 resultados por búsqueda:** Límite ampliado para aprovechar al máximo todas las fuentes activas simultáneamente.
 *   **Gestión de Candidaturas:** Tracking local en SQLite (`Guardado`, `Aplicado`, `Entrevista`, `Rechazado`).
 *   **Auto-Apply & Outreach:** Generación automática de cartas de presentación y correos de seguimiento personalizados.
 *   **Carta de Presentación por Oferta:** Selección explícita de oferta guardada antes de generar la carta.
+*   **Nota sobre fuentes:** Indeed y Glassdoor bloquean scraping público sin API key oficial. Las fuentes más fiables sin coste son LinkedIn, WeWorkRemotely, DjangoJobs y Adzuna (requiere key gratuita).
 
 ### 💳 Control de Costes API (portal TheirStack)
 *   **Integración TheirStack en Modo Ahorro:** Activación manual desde UI para evitar consumo accidental.
@@ -87,37 +90,68 @@
 *   **Tope Diario Persistente:** Límite diario configurable de créditos TheirStack (por defecto: 20/día).
 *   **Ventana Temporal Acotada:** Búsquedas TheirStack con antigüedad máxima configurable (`posted_at_max_age_days`).
 
-### 🔐 Auth, Billing y Membresías
+### 💳 Billing y Membresías (Paddle)
+*   **Modelo de Prueba (Trial) de 3 días:** Integración nativa de pruebas gratuitas en planes PRO y PREMIUM. El acceso se activa instantáneamente tras iniciar el trial en Paddle.
+*   **Paddle Checkout v2:** Flujo de pago moderno integrado en la web (`apps/web`) utilizando el hook `usePaddle` y Price IDs específicos para cada plan.
+*   **IDs de Producto (Paddle):** 
+    *   PRO: `pri_01************`
+    *   PREMIUM: `pri_01************`
+    *   LIFETIME: `pri_01************`
+*   **Webhook Endurecido:** Verificación de firma HMAC-SHA256 para cada evento de Paddle, garantizando que los datos de suscripción provienen únicamente del proveedor oficial.
+*   **Idempotencia de Eventos:** Validación de `eventId` para evitar procesamientos duplicados de transacciones.
+*   **Persistencia de Suscripción:** Mapeo completo de estados de Paddle (`trialing`, `active`, `past_due`, `canceled`) en la base de datos interna.
+*   **Control de Descargas:** El backend bloquea el acceso al ejecutable si el usuario no tiene una suscripción válida (activa o en periodo de prueba).
+
+### 🔐 Seguridad e Infraestructura
 *   **Auth lista para cloud:** Registro, login, `me`, refresh token rotatorio y logout verificados contra la API desplegada.
-*   **Billing con Stripe funcional:** Planes `Pro`, `Premium` y `Lifetime` expuestos por API y conectados a Stripe Checkout.
-*   **Webhook Stripe endurecido:** Verificación real de firma del webhook con `STRIPE_WEBHOOK_SECRET` para evitar activaciones falsas.
-*   **Persistencia de suscripción:** Tras pago en Stripe test mode, la suscripción queda reflejada en backend (`plan`, `status`, `stripeCustomerId`, `stripeSubscriptionId`).
+*   **Superuser Bypass (Dev/Personal):** Sistema de acceso total mediante la variable de entorno `SUPERUSER_EMAILS`. Los emails listados obtienen rol `admin` y suscripción Premium automática.
 *   **Infra free-tier validada:** Deploy operativo sobre Render + Neon + Upstash con smoke tests reales de health, auth y billing.
 
+### 🌐 Landing Web Premium (Next.js)
+*   **Carrusel Continuo de Portales de Empleo (Crawler Logos):** Un carrusel dinámico e infinito que muestra logos vectoriales de las fuentes más populares (LinkedIn, Infojobs, Indeed, etc.) con sus colores de marca originales.
+*   **Consentimiento de Cookies Inteligente:** Banner de privacidad no intrusivo persistido mediante almacenamiento local (`localStorage`) para cumplimiento normativo óptimo.
+*   **Rich Aesthetics (Diseño Inmersivo):** Transición fluida entre secciones sin cortes duros, iluminaciones ambientales con orbes difusos en tonos azul/índigo, y un diseño visualmente unificado.
+*   **Cards de Contenido y Tablas Premium:** Tablas de comparación con bordes suavizados (`rounded-3xl`), resplandor trasero dinámico (`glow backdrop`) y tarjetas modulares de soporte con colores de contraste balanceados.
+*   **Internacionalización & UX:** Traducción total al español y enrutado SPA optimizado mediante componentes `<Link>` nativos.
+*   **Auth con Clerk Personalizado:** Registro e inicio de sesión integrados con Clerk. Interfaz de usuario adaptada a modo oscuro (menús y popovers con visibilidad corregida).
+*   **Landing enfocada a Conversión:** Sección de precios actualizada con los límites reales (50 Auto-Applies en Pro, Ilimitado en Premium) y llamada a la acción directa para el Trial de 3 días.
+*   **Logo e Identidad:** Restauración y preservación del logo original de Epsylon en toda la plataforma.
+
 ### 🧠 Inteligencia Avanzada
-*   **OCR Inteligente con Auto-Sugerencia:** Soporte mixto `spa+eng` con carga de imágenes o pegado directo desde el portapapeles. Al detectar texto, el sistema dispara automáticamente la generación de sugerencias.
+*   **OCR Inteligente con Auto-Sugerencia:** Soporte mixto `spa+eng` con carga de imágenes o pegado directo desde el portapapeles. Al detectar texto, el sistema dispara automáticamente la generación de sugerencias IA. 
 *   **TTS (Text-To-Speech):** Escucha las sugerencias de la IA a través de tus auriculares.
 *   **Memoria de Entrevista por Rol y Nivel:** Base general común + memoria específica para Backend, Java, Spring Boot, Full Stack y niveles Mid / Mid-Adv.
 *   **Base de Conocimiento Local (PDF/TXT):** Ingesta, búsqueda, listado, reindexado y borrado de documentos desde la app.
-*   **Pestaña dedicada de KB:** La gestión de la base de conocimiento vive en una pestaña separada (`Base de conocimiento`) con una interfaz optimizada.
+*   **Pestaña dedicada de KB:** La gestión de la base de conocimiento vive en una pestaña/sección separada (`Base de conocimiento`) con una interfaz optimizada que incluye filtrado en tiempo real y una vista compacta basada en tablas para documentos y resultados.
 *   **Trazabilidad de contexto:** Las sugerencias pueden devolver `knowledgeHits` para ver qué fragmentos KB se usaron.
-*   **Wizard BYOK de OpenRouter en Ajustes:** Flujo guiado para crear/verificar/guardar API key y usarla por defecto.
-*   **Clave del usuario como preferente:** Si el usuario guarda su OpenRouter API key, se usa por defecto en sugerencias, cover letters y follow-up emails.
+*   **Wizard BYOK de OpenRouter en Ajustes:** El usuario puede crear cuenta, generar su API key, verificarla y guardarla desde un flujo guiado de 3 pasos.
+*   **Clave del usuario como preferente:** Si el usuario guarda su OpenRouter API key, se usa por defecto en sugerencias, cover letters y follow-up emails; si no existe, el backend usa la clave base del sistema.
 *   **Analíticas:** Visualiza tu progreso con dashboards de búsqueda y éxito en entrevistas.
 
 ### ⚡ Rendimiento y Operación
-*   **Arquitectura Modular:** Componentes críticos extraídos para mejorar mantenibilidad.
+*   **Arquitectura Modular:** Componentes críticos como el `TeleprompterView`, `useDiscreetMode` y utilidades de procesamiento han sido extraídos de la vista principal para mejorar la mantenibilidad y el rendimiento del renderizado.
 *   **Compresión HTTP:** API Fastify con compresión global para respuestas grandes.
 *   **Carga Diferida de OCR:** `tesseract.js` se carga solo cuando se usa OCR (mejor arranque de API).
 *   **Índices en Persistencia Local:** SQLite para jobs + SQLite FTS5 para chunks KB + índice Q/A dedicado para recuperación más precisa.
 *   **Análisis de Bundle Desktop:** Script para inspeccionar tamaño y composición del bundle de renderer.
 *   **Observabilidad:** Logs estructurados ultra-rápidos con `pino` y visualización legible en desarrollo con `pino-pretty`.
 *   **Documentación Interactiva:** Endpoints del backend auto-documentados vía Swagger UI (`/docs`).
-*   **CI/CD Automatizado:** Pipeline en GitHub Actions configurado para compilar y publicar releases (Tauri y Backend) de forma inteligente.
+*   **CI/CD Automatizado:** Pipeline en GitHub Actions configurado para compilar y publicar releases (Tauri y Backend) de forma inteligente (bajo demanda o por tags) ahorrando minutos de ejecución.
 
 ---
 
 ## 🖼️ Infografia del Proyecto
+<!-- SYNC:FEATURES:END -->
+<details>
+  <summary>Ver infografia del proyecto</summary>
+  <br />
+  <p align="center">
+    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
+  </p>
+</details>
+
+---
+
 <!-- SYNC:FEATURES:END -->
 <p align="center">
   <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
