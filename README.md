@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/banner.png" alt="Epsylon Banner" width="100%">
+  <video src="https://github.com/user-attachments/assets/105927ac-dded-4c58-8adb-c3c983dbf909" alt="video-banner">
 </p>
 
 <p align="center">
