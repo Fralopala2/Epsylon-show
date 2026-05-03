@@ -99,12 +99,13 @@
 *   **Ventana Temporal Acotada:** Búsquedas TheirStack con antigüedad máxima configurable (`posted_at_max_age_days`).
 
 ### 💳 Billing y Membresías (Stripe)
-*   **Modelo de Prueba (Trial) de 3 días:** En planes **PRO** y **PREMIUM**, el checkout crea una suscripción en Stripe con `trial_period_days: 3`. El estado `trialing` se refleja como **`trial`** en la API para desbloquear descarga y panel mientras dura la prueba.
+*   **Modelo de Prueba (Trial) de 3 días:** En planes **PRO** y **PREMIUM**, el checkout puede crear una suscripción en Stripe con `trial_period_days: 3` **solo si la cuenta aún no ha usado el trial de pago** (una vez en la vida por usuario). El estado `trialing` se refleja como **`trial`** en la API para desbloquear descarga y panel mientras dura la prueba.
+*   **Anti-abuso trial:** Columna `paid_trial_consumed_at` en `subscriptions`. Se marca al entrar en `trialing` vía webhook; los siguientes checkouts PRO/PREMIUM van **sin** trial. `GET /billing/subscription` incluye `paidTrialEligible` para la UI.
 *   **Stripe Checkout (hosted):** La web (`apps/web`) obtiene la URL de pago vía `POST /billing/checkout-session` (proxy autenticado en `/api/proxy/billing/checkout-session`) y redirige al Checkout de Stripe. Los **Price IDs** se configuran en el backend con variables `STRIPE_PRICE_*`.
 *   **Planes:** **PRO**, **PREMIUM** (suscripción) y **LIFETIME** (pago único, modo `payment`). Los precios concretos viven en el dashboard de Stripe y se enlazan por ID en el entorno.
 *   **Webhook:** Verificación con **`stripe.webhooks.constructEvent`** y `STRIPE_WEBHOOK_SECRET`. Eventos relevantes: `checkout.session.completed` (pago único / lifetime), `customer.subscription.created` / `updated` / `deleted`, `invoice.paid` y `invoice.payment_failed`. **Idempotencia** por tabla `billing_events` (no reprocesar el mismo `event.id`). Estados sincronizados con Stripe (p. ej. `trialing` → **`trial`**, más `active`, `past_due`, **`unpaid`**, `canceled`). Opcional **`STRIPE_TAX_ENABLED`** para Stripe Tax en Checkout.
 *   **Checklist operacional:** ver `docs/DEPLOYMENT.md` (portal, Smart Retries, IVA, copy de producto en Stripe, test/live).
-*   **Persistencia:** Tabla `subscriptions` en PostgreSQL (`stripe_customer_id`, `stripe_subscription_id`, `plan`, `status`, `current_period_end`). Estados internos incluyen `trial`, `active`, `past_due`, `canceled`, `inactive`.
+*   **Persistencia:** Tabla `subscriptions` en PostgreSQL (`stripe_customer_id`, `stripe_subscription_id`, `plan`, `status`, `current_period_end`, `trial_end`, `paid_trial_consumed_at`). Estados internos incluyen `trial`, `active`, `past_due`, `canceled`, `inactive`.
 *   **Portal de cliente:** `POST /billing/customer-portal` para gestionar facturación cuando ya existe `stripe_customer_id`.
 *   **Control de Descargas:** El backend bloquea el acceso al ejecutable si el usuario no tiene una suscripción válida (`active` o `trial`).
 
@@ -148,6 +149,17 @@
 ---
 
 ## 🖼️ Infografia del Proyecto
+<!-- SYNC:FEATURES:END -->
+<details>
+  <summary>Ver infografia del proyecto</summary>
+  <br />
+  <p align="center">
+    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
+  </p>
+</details>
+
+---
+
 <!-- SYNC:FEATURES:END -->
 <details>
   <summary>Ver infografia del proyecto</summary>
