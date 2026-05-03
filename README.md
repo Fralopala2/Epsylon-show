@@ -148,85 +148,8 @@
 
 ---
 
-## 🖼️ Infografia del Proyecto
 <!-- SYNC:FEATURES:END -->
-<details>
-  <summary>Ver infografia del proyecto</summary>
-  <br />
-  <p align="center">
-    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
-  </p>
-</details>
 
----
-
-<!-- SYNC:FEATURES:END -->
-<details>
-  <summary>Ver infografia del proyecto</summary>
-  <br />
-  <p align="center">
-    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
-  </p>
-</details>
-
----
-
-<!-- SYNC:FEATURES:END -->
-<details>
-  <summary>Ver infografia del proyecto</summary>
-  <br />
-  <p align="center">
-    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
-  </p>
-</details>
-
----
-
-<!-- SYNC:FEATURES:END -->
-<details>
-  <summary>Ver infografia del proyecto</summary>
-  <br />
-  <p align="center">
-    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
-  </p>
-</details>
-
----
-
-<!-- SYNC:FEATURES:END -->
-<details>
-  <summary>Ver infografia del proyecto</summary>
-  <br />
-  <p align="center">
-    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
-  </p>
-</details>
-
----
-
-<!-- SYNC:FEATURES:END -->
-<details>
-  <summary>Ver infografia del proyecto</summary>
-  <br />
-  <p align="center">
-    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
-  </p>
-</details>
-
----
-
-<!-- SYNC:FEATURES:END -->
-<details>
-  <summary>Ver infografia del proyecto</summary>
-  <br />
-  <p align="center">
-    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
-  </p>
-</details>
-
----
-
-<!-- SYNC:FEATURES:END -->
 ## 🖼️ Infografia del Proyecto
 
 <details>
@@ -281,4 +204,4 @@ Epsylon/
 ## 📄 Licencia
 
 Código fuente bajo licencia **All Rights Reserved**.
-Este repositorio de escaparate es público solo con fines de presentación en portfolio.
+Este repositorio de escaparate es público solo con fines de presentación del proyecto Epsylon.
