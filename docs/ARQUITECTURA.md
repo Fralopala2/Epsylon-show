@@ -58,7 +58,7 @@ flowchart TD
 
 ---
 
-## Interview copilot — flujo detallado
+## Interview assistant (training mode)
 
 ```mermaid
 sequenceDiagram
@@ -69,7 +69,7 @@ sequenceDiagram
     participant LLM as LLM (Gemini / OpenAI)
     participant KB as Base de conocimiento (SQLite FTS5)
 
-    Usuario->>Desktop: habla durante la entrevista
+    Usuario->>Desktop: inicia una sesion de practica o simulacion
     Desktop->>API: audio chunk
     API->>STT: transcripcion
     STT-->>API: texto transcrito
@@ -78,7 +78,7 @@ sequenceDiagram
     API->>LLM: prompt + contexto
     LLM-->>API: sugerencia
     API-->>Desktop: sugerencia renderizada
-    Desktop-->>Usuario: teleprompter / overlay
+    Desktop-->>Usuario: interfaz de apoyo para entrenamiento
 ```
 
 ---
@@ -152,7 +152,5 @@ flowchart LR
 
 ## Proximos pasos arquitectonicos
 
-- **Anti-bot:** definir estrategia de endurecimiento para los conectores de empleo
-- **Multiusuario:** migrar tracking de jobs al esquema principal de PostgreSQL
 - **Telemetria:** calidad de resultados por fuente de empleo
 - **Release Tauri:** firmado de binarios, sistema de actualizaciones y observabilidad en produccion
