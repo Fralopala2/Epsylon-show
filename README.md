@@ -3,10 +3,11 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.0.1-blue?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/badge/Status-Complete-green?style=for-the-badge" alt="Status">
   <img src="https://img.shields.io/badge/License-All%20Rights%20Reserved-red?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/Built%20with-Tauri%20%2B%20React-24c8db?style=for-the-badge" alt="Built with">
+  <img src="https://img.shields.io/badge/Billing-Stripe-635BFF?style=for-the-badge" alt="Billing">
+  <img src="https://img.shields.io/badge/Built%20with-Tauri%20%2B%20Next.js%2016-24c8db?style=for-the-badge" alt="Built with">
 </p>
 
 ---
