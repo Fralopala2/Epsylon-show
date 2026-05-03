@@ -192,6 +192,17 @@
 ---
 
 <!-- SYNC:FEATURES:END -->
+<details>
+  <summary>Ver infografia del proyecto</summary>
+  <br />
+  <p align="center">
+    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
+  </p>
+</details>
+
+---
+
+<!-- SYNC:FEATURES:END -->
 ## 🖼️ Infografia del Proyecto
 
 <details>
