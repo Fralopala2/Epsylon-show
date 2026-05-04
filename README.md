@@ -37,9 +37,7 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 ## 🌀 Pantalla de login Desktop
 
 <p align="center">
-  @file:login.png
-  <br />
-  <img src="./assets/login.png" alt="Pantalla de login" width="50%">
+ <img src="./assets/login.png" alt="Pantalla de login" width="50%">
 </p>
 
 ---
