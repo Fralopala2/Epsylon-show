@@ -96,34 +96,32 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 ### 🔍 Job Search Engine (Búsqueda Automatizada)
 *   **Crawlers Multi-Fuente:** Rastreo en LinkedIn, Infojobs, WeWorkRemotely, DjangoJobs, Adzuna, TheirStack y más.
 *   **Diagnóstico de Crawlers en tiempo real:** Tras cada búsqueda, la UI muestra un badge por fuente indicando cuántas ofertas encontró, si está mal configurada (⚠) o si falló (✗).
-*   **UI de Ofertas compacta (v0.2.0):** Filtros reorganizados en rejilla y controles de fuentes simplificados para reducir ruido visual y mejorar la lectura operativa.
+*   **UI de Ofertas compacta:** Filtros reorganizados en rejilla y controles de fuentes simplificados para reducir ruido visual y mejorar la lectura operativa.
 *   **Filtros Avanzados:** Filtra por salario, experiencia, ubicación y modalidad remota. El filtro de ubicación reconoce aliases internacionales (España↔Spain, Alemania↔Germany, etc.).
 *   **Hasta 200 resultados por búsqueda:** Límite ampliado para aprovechar al máximo todas las fuentes activas simultáneamente.
 *   **Gestión de Candidaturas:** Tracking local en SQLite (`Guardado`, `Aplicado`, `Entrevista`, `Rechazado`).
 *   **Auto-Apply & Outreach:** Generación automática de cartas de presentación y correos de seguimiento personalizados.
-*   **Follow-up premium (v0.2.0):** La generación de correo de seguimiento en Desktop queda disponible desde **PREMIUM/LIFETIME**.
+*   **Follow-up premium:** La generación de correo de seguimiento en Desktop queda disponible desde **PREMIUM/LIFETIME**.
 *   **Carta de Presentación por Oferta:** Selección explícita de oferta guardada antes de generar la carta.
 *   **Nota sobre fuentes:** Indeed y Glassdoor bloquean scraping público sin API key oficial. Las fuentes más fiables sin coste son LinkedIn, WeWorkRemotely, DjangoJobs y Adzuna (requiere key gratuita).
 
-### 💳 Control de Costes API (portal TheirStack)
-*   **Integración TheirStack en Modo Ahorro:** Activación manual desde UI para evitar consumo accidental.
-*   **Tope por Consulta:** Máximo 5 resultados por búsqueda en TheirStack.
-*   **Tope Diario Persistente:** Límite diario configurable de créditos TheirStack (por defecto: 20/día).
-*   **Ventana Temporal Acotada:** Búsquedas TheirStack con antigüedad máxima configurable (`posted_at_max_age_days`).
+### 💎 Membresías y Cuotas (Stripe)
 
-### 💳 Billing y Membresías (Stripe)
-*   **Modelo de Prueba (Trial) de 3 días:** En planes **PRO** y **PREMIUM**, el checkout puede crear una suscripción en Stripe con `trial_period_days: 3` **solo si la cuenta aún no ha usado el trial de pago** (una vez en la vida por usuario). El estado `trialing` se refleja como **`trial`** en la API para desbloquear descarga y panel mientras dura la prueba.
-*   **Anti-abuso trial:** Columna `paid_trial_consumed_at` en `subscriptions`. Se marca al entrar en `trialing` vía webhook; los siguientes checkouts PRO/PREMIUM van **sin** trial. `GET /billing/subscription` incluye `paidTrialEligible` para la UI.
-*   **Stripe Checkout (hosted):** La web (`apps/web`) obtiene la URL de pago vía `POST /billing/checkout-session` (proxy autenticado en `/api/proxy/billing/checkout-session`) y redirige al Checkout de Stripe. Los **Price IDs** se configuran en el backend con variables `STRIPE_PRICE_*`.
-*   **Planes:** **PRO**, **PREMIUM** (suscripción) y **LIFETIME** (pago único, modo `payment`). Los precios concretos viven en el dashboard de Stripe y se enlazan por ID en el entorno.
-*   **Webhook:** Verificación con **`stripe.webhooks.constructEvent`** y `STRIPE_WEBHOOK_SECRET`. Eventos relevantes: `checkout.session.completed` (pago único / lifetime), `customer.subscription.created` / `updated` / `deleted`, `invoice.paid` y `invoice.payment_failed`. **Idempotencia** por tabla `billing_events` (no reprocesar el mismo `event.id`). Estados sincronizados con Stripe (p. ej. `trialing` → **`trial`**, más `active`, `past_due`, **`unpaid`**, `canceled`). Opcional **`STRIPE_TAX_ENABLED`** para Stripe Tax en Checkout.
-*   **Checklist operacional:** ver `docs/DEPLOYMENT.md` (portal, Smart Retries, IVA, copy de producto en Stripe, test/live).
-*   **Persistencia:** Tabla `subscriptions` en PostgreSQL (`stripe_customer_id`, `stripe_subscription_id`, `plan`, `status`, `current_period_end`, `trial_end`, `paid_trial_consumed_at`). Estados internos incluyen `trial`, `active`, `past_due`, `canceled`, `inactive`.
-*   **Portal de cliente:** `POST /billing/customer-portal` para gestionar facturación cuando ya existe `stripe_customer_id`.
+Epsylon utiliza un sistema de suscripción basado en cuotas mensuales para garantizar la sostenibilidad del servicio.
+
+| Característica | FREE | PRO (19€/mes) | PREMIUM (49€/mes) |
+| :--- | :--- | :--- | :--- |
+| **STT (Transcripción)** | 0 min | 120 min/mes | 600 min/mes |
+| **Mock Interviews** | 0 | 10 sesiones/mes | 50 sesiones/mes |
+| **Auto-Apply** | 0 | 50 aplicaciones/mes | 300 aplicaciones/mes |
+| **Stealth Suite** | No | Básico | Completo (Win32 + Capturas) |
+| **LLMs Avanzados** | No | No | Sí (OpenAI, Gemini, Claude) |
+| **TheirStack API** | No | No | Habilitado |
+| **Base Conocimiento** | 5 docs | 25 docs | 200 docs |
+
+*   **Modelo de Prueba (Trial) de 3 días:** En planes **PRO** y **PREMIUM**, el checkout puede crear una suscripción en Stripe con `trial_period_days: 3` **solo si la cuenta aún no ha usado el trial de pago** (una vez en la vida por usuario).
 *   **Control de Descargas:** El backend bloquea el acceso al ejecutable si el usuario no tiene una suscripción válida (`active` o `trial`).
-*   **Reconciliación con Stripe al leer el panel:** En `GET /billing/subscription`, si la fila local está `canceled` / `inactive` / `unpaid` pero Stripe sigue teniendo una suscripción PRO/PREMIUM viva (webhooks desfasados o suscripción sustituida), el API vuelve a consultar Stripe y persiste el estado correcto antes de responder.
-*   **Reglas de IA por plan (v0.2.0):** En endpoints de copiloto/carta (`/interview/assistant/suggest`, `/jobs/cover-letter/generate`) el backend restringe proveedores avanzados a **PREMIUM/LIFETIME**; **PRO/FREE** usan **OpenRouter**.
-*   **Errores Stripe de recursos huérfanos:** Si el `stripe_customer_id`/`stripe_subscription_id` local apunta a recursos inexistentes (test/live desalineado o borrado), el backend limpia referencias obsoletas y evita bucles de fallo.
+*   **Portal de cliente:** `POST /billing/customer-portal` para gestionar facturación, planes y cancelaciones directamente en Stripe desde el panel web.
 
 ### 🔐 Seguridad e Infraestructura
 *   **Auth lista para cloud:** Registro, login, `me`, refresh token rotatorio y logout verificados contra la API desplegada.
@@ -131,43 +129,42 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 *   **Infra free-tier validada:** Deploy operativo sobre Render + Neon + Upstash con smoke tests reales de health, auth y billing.
 
 ### 🌐 Landing Web Premium (Next.js)
-*   **Carrusel Continuo de Portales de Empleo (Crawler Logos):** Un carrusel dinámico e infinito que muestra logos vectoriales de las fuentes más populares (LinkedIn, Infojobs, Indeed, etc.) con sus colores de marca originales.
-*   **Consentimiento de Cookies Inteligente:** Banner de privacidad no intrusivo persistido mediante almacenamiento local (`localStorage`) para cumplimiento normativo óptimo.
-*   **Rich Aesthetics (Diseño Inmersivo):** Transición fluida entre secciones sin cortes duros, iluminaciones ambientales con orbes difusos en tonos azul/índigo, y un diseño visualmente unificado.
-*   **Cards de Contenido y Tablas Premium:** Tablas de comparación con bordes suavizados (`rounded-3xl`), resplandor trasero dinámico (`glow backdrop`) y tarjetas modulares de soporte con colores de contraste balanceados.
-*   **Internacionalización & UX:** Traducción total al español y enrutado SPA optimizado mediante componentes `<Link>` nativos.
-*   **Auth con Clerk Personalizado:** Registro e inicio de sesión integrados con Clerk. Interfaz de usuario adaptada a modo oscuro (menús y popovers con visibilidad corregida).
-*   **Landing enfocada a Conversión:** Sección de precios actualizada con los límites reales (50 Auto-Applies en Pro, Ilimitado en Premium) y llamada a la acción directa para el Trial de 3 días.
-*   **Logo e Identidad:** Restauración y preservación del logo original de Epsylon en toda la plataforma.
-*   **Descarga del instalador Windows:** Desde el panel `/app`, enlace a `/api/download` solo para usuarios Clerk con suscripción `active` o `trial`; el servidor valida contra el API y rechaza placeholders o instaladores corruptos (tamaño mínimo).
-*   **Contraseña del escritorio desde la web:** En el panel se puede fijar la contraseña del API usada en el login del Tauri (independiente de Clerk), vía proxy autenticado hacia `POST /auth/desktop-password`.
+*   **Carrusel Continuo de Portales de Empleo (Crawler Logos):** Un carrusel dinámico e infinito que muestra logos vectoriales de las fuentes más populares.
+*   **Consentimiento de Cookies Inteligente:** Banner de privacidad no intrusivo persistido mediante almacenamiento local.
+*   **Rich Aesthetics (Diseño Inmersivo):** Transición fluida entre secciones, iluminaciones ambientales con orbes difusos y diseño visual unificado.
+*   **Auth con Clerk Personalizado:** Registro e inicio de sesión integrados con Clerk. Interfaz de usuario adaptada a modo oscuro.
+*   **Descarga del instalador Windows:** Enlace a `/api/download` solo para usuarios Clerk con suscripción `active` o `trial`.
 
 ### 🧠 Inteligencia Avanzada
-*   **OCR Inteligente con Auto-Sugerencia:** Soporte mixto `spa+eng` con carga de imágenes o pegado directo desde el portapapeles. Al detectar texto, el sistema dispara automáticamente la generación de sugerencias IA. 
+*   **OCR Inteligente con Auto-Sugerencia:** Soporte mixto `spa+eng` con carga de imágenes o pegado directo.
 *   **TTS (Text-To-Speech):** Escucha las sugerencias de la IA a través de tus auriculares.
-*   **Memoria de Entrevista por Rol y Nivel:** Base general común + memoria específica para Backend, Java, Spring Boot, Full Stack y niveles Mid / Mid-Adv.
 *   **Base de Conocimiento Local (PDF/TXT):** Ingesta, búsqueda, listado, reindexado y borrado de documentos desde la app.
-*   **Pestaña dedicada de KB:** La gestión de la base de conocimiento vive en una pestaña/sección separada (`Base de conocimiento`) con una interfaz optimizada que incluye filtrado en tiempo real y una vista compacta basada en tablas para documentos y resultados.
-*   **Trazabilidad de contexto:** Las sugerencias pueden devolver `knowledgeHits` para ver qué fragmentos KB se usaron.
-*   **Wizard BYOK de OpenRouter en Ajustes:** El usuario puede crear cuenta, generar su API key, verificarla y guardarla desde un flujo guiado de 3 pasos.
-*   **Clave del usuario como preferente:** Si el usuario guarda su OpenRouter API key, se usa por defecto en sugerencias, cover letters y follow-up emails; si no existe, el backend usa la clave base del sistema.
-*   **Groq STT BYOK (opcional) en Ajustes:** Campo dedicado para guardar una clave de Groq en el equipo. Solo se envía al backend en peticiones de transcripción (`POST /interview/stt/transcribe`) mediante la cabecera `X-Groq-Api-Key`. Útil cuando la API desplegada no define `GROQ_API_KEY` o quieres consumir cuota propia sin tocar el servidor.
-*   **Analíticas:** Visualiza tu progreso con dashboards de búsqueda y éxito en entrevistas.
+*   **Wizard BYOK de OpenRouter en Ajustes:** Flujo guiado de 3 pasos para que el usuario use sus propias claves IA.
+*   **Groq STT BYOK (opcional) en Ajustes:** Campo dedicado para guardar una clave de Groq en el equipo para transcripción de alta velocidad.
 
 ### ⚡ Rendimiento y Operación
-*   **Arquitectura Modular:** Componentes críticos como el `TeleprompterView`, `useDiscreetMode` y utilidades de procesamiento han sido extraídos de la vista principal para mejorar la mantenibilidad y el rendimiento del renderizado.
-*   **Compresión HTTP:** API Fastify con compresión global para respuestas grandes.
-*   **Carga Diferida de OCR:** `tesseract.js` se carga solo cuando se usa OCR (mejor arranque de API).
-*   **Índices en Persistencia Local:** SQLite para jobs + SQLite FTS5 para chunks KB + índice Q/A dedicado para recuperación más precisa.
-*   **Análisis de Bundle Desktop:** Script para inspeccionar tamaño y composición del bundle de renderer.
-*   **Observabilidad:** Logs estructurados ultra-rápidos con `pino` y visualización legible en desarrollo con `pino-pretty`.
-*   **Documentación Interactiva:** Endpoints del backend auto-documentados vía Swagger UI (`/docs`).
-*   **Tests Unitarios e Integración:** Suite de pruebas automatizada para componentes críticos, utilidades y servicios del backend, garantizando estabilidad ante cambios.
-*   **CI/CD Automatizado:** Pipeline en GitHub Actions configurado para compilar y publicar releases (Tauri y Backend) de forma inteligente (bajo demanda o por tags) ahorrando minutos de ejecución.
+*   **Arquitectura Modular:** Componentes críticos extraídos de la vista principal para mejorar mantenibilidad.
+*   **Compresión HTTP:** API Fastify con compresión global.
+*   **Carga Diferida de OCR:** `tesseract.js` se carga solo cuando se usa.
+*   **Observabilidad:** Logs estructurados ultra-rápidos con `pino`.
+*   **Tests Unitarios e Integración:** Suite de pruebas automatizada para garantizar estabilidad.
 
 ---
 
+<!-- SYNC:INFOGRAPHIC:START -->
+
 ## 🖼️ Infografia del Proyecto
+
+<details>
+  <summary>Ver infografia del proyecto</summary>
+  <br />
+  <p align="center">
+    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
+  </p>
+</details>
+
+---
+
 <!-- SYNC:FEATURES:END -->
 <details>
   <summary>Ver infografia del proyecto</summary>
