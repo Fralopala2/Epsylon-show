@@ -151,8 +151,6 @@ Epsylon utiliza un sistema de suscripción basado en cuotas mensuales para garan
 
 ---
 
-<!-- SYNC:INFOGRAPHIC:START -->
-
 ## 🖼️ Infografia del Proyecto
 
 <details>
@@ -164,6 +162,8 @@ Epsylon utiliza un sistema de suscripción basado en cuotas mensuales para garan
 </details>
 
 ---
+
+<!-- SYNC:INFOGRAPHIC:END -->
 
 <!-- SYNC:FEATURES:END -->
 <details>
