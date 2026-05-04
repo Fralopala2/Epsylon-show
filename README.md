@@ -18,9 +18,9 @@
 
 # 🛸 Epsylon
 
-**Epsylon** es una plataforma de apoyo profesional impulsada por IA diseñada para ayudarte a prepararte, practicar y mejorar tu rendimiento en procesos de selección técnica.
+**Epsylon** es el asistente definitivo impulsado por IA diseñado para revolucionar tu carrera profesional. 
 
-Combina herramientas de simulación de entrevistas, asistencia contextual y automatización en la búsqueda de empleo en una aplicación moderna, potente y fácil de usar.
+Combina la potencia de la automatización en la búsqueda de empleo, con la asistencia inteligente en tiempo real durante entrevistas técnicas, todo en una aplicación de escritorio discreta, potente e inteligente.
 
 > "No solo busques trabajo. Prepárate mejor y afronta cada oportunidad con más confianza."
 
