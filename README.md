@@ -98,10 +98,12 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 ### 🔍 Job Search Engine (Búsqueda Automatizada)
 *   **Crawlers Multi-Fuente:** Rastreo en LinkedIn, Infojobs, WeWorkRemotely, DjangoJobs, Adzuna, TheirStack y más.
 *   **Diagnóstico de Crawlers en tiempo real:** Tras cada búsqueda, la UI muestra un badge por fuente indicando cuántas ofertas encontró, si está mal configurada (⚠) o si falló (✗).
+*   **UI de Ofertas compacta (v0.2.0):** Filtros reorganizados en rejilla y controles de fuentes simplificados para reducir ruido visual y mejorar la lectura operativa.
 *   **Filtros Avanzados:** Filtra por salario, experiencia, ubicación y modalidad remota. El filtro de ubicación reconoce aliases internacionales (España↔Spain, Alemania↔Germany, etc.).
 *   **Hasta 200 resultados por búsqueda:** Límite ampliado para aprovechar al máximo todas las fuentes activas simultáneamente.
 *   **Gestión de Candidaturas:** Tracking local en SQLite (`Guardado`, `Aplicado`, `Entrevista`, `Rechazado`).
 *   **Auto-Apply & Outreach:** Generación automática de cartas de presentación y correos de seguimiento personalizados.
+*   **Follow-up premium (v0.2.0):** La generación de correo de seguimiento en Desktop queda disponible desde **PREMIUM/LIFETIME**.
 *   **Carta de Presentación por Oferta:** Selección explícita de oferta guardada antes de generar la carta.
 *   **Nota sobre fuentes:** Indeed y Glassdoor bloquean scraping público sin API key oficial. Las fuentes más fiables sin coste son LinkedIn, WeWorkRemotely, DjangoJobs y Adzuna (requiere key gratuita).
 
@@ -122,6 +124,8 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 *   **Portal de cliente:** `POST /billing/customer-portal` para gestionar facturación cuando ya existe `stripe_customer_id`.
 *   **Control de Descargas:** El backend bloquea el acceso al ejecutable si el usuario no tiene una suscripción válida (`active` o `trial`).
 *   **Reconciliación con Stripe al leer el panel:** En `GET /billing/subscription`, si la fila local está `canceled` / `inactive` / `unpaid` pero Stripe sigue teniendo una suscripción PRO/PREMIUM viva (webhooks desfasados o suscripción sustituida), el API vuelve a consultar Stripe y persiste el estado correcto antes de responder.
+*   **Reglas de IA por plan (v0.2.0):** En endpoints de copiloto/carta (`/interview/assistant/suggest`, `/jobs/cover-letter/generate`) el backend restringe proveedores avanzados a **PREMIUM/LIFETIME**; **PRO/FREE** usan **OpenRouter**.
+*   **Errores Stripe de recursos huérfanos:** Si el `stripe_customer_id`/`stripe_subscription_id` local apunta a recursos inexistentes (test/live desalineado o borrado), el backend limpia referencias obsoletas y evita bucles de fallo.
 
 ### 🔐 Seguridad e Infraestructura
 *   **Auth lista para cloud:** Registro, login, `me`, refresh token rotatorio y logout verificados contra la API desplegada.
@@ -166,6 +170,17 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 ---
 
 ## 🖼️ Infografia del Proyecto
+<!-- SYNC:FEATURES:END -->
+<details>
+  <summary>Ver infografia del proyecto</summary>
+  <br />
+  <p align="center">
+    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
+  </p>
+</details>
+
+---
+
 <!-- SYNC:FEATURES:END -->
 <details>
   <summary>Ver infografia del proyecto</summary>
