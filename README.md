@@ -61,6 +61,8 @@ Combina herramientas de simulación de entrevistas, asistencia contextual y auto
 
 ---
 
+<!-- SYNC:FEATURES:START -->
+
 ## 🚀 Características Principales
 
 ### 🎤 Asistente de Entrevistas (Preparación y Apoyo)
@@ -138,6 +140,8 @@ Epsylon está diseñado para:
 - Proporcionar herramientas prácticas de entrenamiento profesional.
 
 ---
+
+<!-- SYNC:FEATURES:END -->
 
 ## ⚠️ Nota de Uso
 
