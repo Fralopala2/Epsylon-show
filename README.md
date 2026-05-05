@@ -189,22 +189,6 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 
 ---
 
-<!-- SYNC:FEATURES:END -->
-
----
-
-## 🖼️ Infografia del Proyecto
-
-<details>
-  <summary>Ver infografia del proyecto</summary>
-  <br />
-  <p align="center">
-    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
-  </p>
-</details>
-
----
-
 ## ⚠️ Nota de Uso
 
 Epsylon es una herramienta de apoyo y entrenamiento. Su objetivo es ayudar a los usuarios a prepararse y mejorar sus habilidades profesionales.
