@@ -173,6 +173,8 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 *   **Tests Unitarios e Integración:** Suite de pruebas automatizada para componentes críticos, utilidades y servicios del backend, garantizando estabilidad ante cambios.
 *   **CI/CD Automatizado:** Pipeline en GitHub Actions configurado para compilar y publicar releases (Tauri y Backend) de forma inteligente (bajo demanda o por tags) ahorrando minutos de ejecución.
 
+<!-- SYNC:FEATURES:END -->
+
 ---
 
 ## 🖼️ Infografia del Proyecto
@@ -185,49 +187,7 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
   </p>
 </details>
 
-<!-- SYNC:FEATURES:END -->
-
 ---
-
-<!-- SYNC:FEATURES:END -->
-
----
-
-<!-- SYNC:FEATURES:END -->
-
----
-
-<!-- SYNC:FEATURES:END -->
-
----
-
-<!-- SYNC:FEATURES:END -->
-
----
-
-<!-- SYNC:FEATURES:END -->
-<details>
-  <summary>Ver infografia del proyecto</summary>
-  <br />
-  <p align="center">
-    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
-  </p>
-</details>
-
----
-
-<!-- SYNC:FEATURES:END -->
-<details>
-  <summary>Ver infografia del proyecto</summary>
-  <br />
-  <p align="center">
-    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
-  </p>
-</details>
-
----
-
-<!-- SYNC:FEATURES:END -->
 
 ## ⚠️ Nota de Uso
 
