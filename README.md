@@ -98,17 +98,16 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 *   **Diagnóstico de Crawlers en tiempo real:** Tras cada búsqueda, la UI muestra un badge por fuente indicando cuántas ofertas encontró, si está mal configurada (⚠) o si falló (✗).
 *   **UI de Ofertas compacta (v0.2.0):** Filtros reorganizados en rejilla y controles de fuentes simplificados para reducir ruido visual y mejorar la lectura operativa.
 *   **Filtros Avanzados:** Filtra por salario, experiencia, ubicación y modalidad remota. El filtro de ubicación reconoce aliases internacionales (España↔Spain, Alemania↔Germany, etc.).
-*   **Hasta 200 resultados por búsqueda:** Límite ampliado para aprovechar al máximo todas las fuentes activas simultáneamente.
+*   **Límite de resultados ampliado:** Hasta 100 resultados por búsqueda (PRO) y hasta 200 (PREMIUM/LIFETIME) para aprovechar al máximo todas las fuentes activas simultáneamente.
 *   **Gestión de Candidaturas:** Tracking local en SQLite (`Guardado`, `Aplicado`, `Entrevista`, `Rechazado`).
 *   **Auto-Apply & Outreach:** Generación automática de cartas de presentación y correos de seguimiento personalizados.
 *   **Follow-up premium (v0.2.0):** La generación de correo de seguimiento en Desktop queda disponible desde **PREMIUM/LIFETIME**.
 *   **Carta de Presentación por Oferta:** Selección explícita de oferta guardada antes de generar la carta.
 *   **Nota sobre fuentes:** Indeed y Glassdoor bloquean scraping público sin API key oficial. Las fuentes más fiables sin coste son LinkedIn, WeWorkRemotely, DjangoJobs y Adzuna (requiere key gratuita).
 
-### 💳 Control de Costes API (portal TheirStack)
-*   **Integración TheirStack en Modo Ahorro:** Activación manual desde UI para evitar consumo accidental.
-*   **Tope por Consulta:** Máximo 5 resultados por búsqueda en TheirStack.
-*   **Tope Diario Persistente:** Límite diario configurable de créditos TheirStack (por defecto: 20/día).
+### 🔍 Control de Costes API (portal TheirStack)
+*   **Integración TheirStack por Plan:** Habilitado para **PRO** (5 result/búsqueda, 20/día) y **PREMIUM** (50 result/búsqueda, 200/día).
+*   **Tope Diario Persistente:** Límites automáticos basados en el plan para evitar consumo excesivo de la cuota compartida.
 *   **Ventana Temporal Acotada:** Búsquedas TheirStack con antigüedad máxima configurable (`posted_at_max_age_days`).
 
 ### 💳 Billing y Membresías (Stripe)
@@ -118,9 +117,11 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 | **STT (Transcripción)** | 0 min | 120 min/mes | 600 min/mes |
 | **Mock Interviews** | 0 | 10 sesiones/mes | 50 sesiones/mes |
 | **Auto-Apply** | 0 | 50 aplicaciones/mes | 300 aplicaciones/mes |
+| **Equipos Activos** | 1 | 1 | 3 (LIFETIME: 100) |
+| **TheirStack API** | No | Básico (5/cons) | Pro (50/cons) |
+| **Búsqueda (Resultados)** | 100 | 100 | 200 |
 | **Stealth Suite** | No | Básico | Completo (Win32 + Capturas) |
 | **LLMs Avanzados** | No | No | Sí (OpenAI, Gemini, Claude) |
-| **TheirStack API** | No | No | Habilitado |
 | **Base Conocimiento** | 5 docs | 25 docs | 200 docs |
 
 *   **Modelo de Prueba (Trial) de 3 días:** En planes **PRO** y **PREMIUM**, el checkout puede crear una suscripción en Stripe con `trial_period_days: 3` **solo si la cuenta aún no ha usado el trial de pago** (una vez en la vida por usuario). El estado `trialing` se refleja como **`trial`** en la API para desbloquear descarga y panel mientras dura la prueba.
@@ -132,6 +133,7 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 *   **Reglas de IA por plan (v0.2.0):** En endpoints de copiloto/carta (`/interview/assistant/suggest`, `/jobs/cover-letter/generate`) el backend restringe proveedores avanzados a **PREMIUM/LIFETIME**; **PRO/FREE** usan **OpenRouter**.
 
 ### 🔐 Seguridad e Infraestructura
+*   **Sesiones Temporales (Desktop):** El token de acceso se almacena en `sessionStorage`, forzando un nuevo inicio de sesión cada vez que se abre la aplicación para máxima seguridad.
 *   **Auth lista para cloud:** Registro, login, `me`, refresh token rotatorio y logout verificados contra la API desplegada.
 *   **Superuser Bypass (Dev/Personal):** Sistema de acceso total mediante la variable de entorno `SUPERUSER_EMAILS`. Los emails listados obtienen rol `admin` y suscripción Premium automática.
 *   **Infra free-tier validada:** Deploy operativo sobre Render + Neon + Upstash con smoke tests reales de health, auth y billing.
@@ -182,6 +184,10 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
     <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
   </p>
 </details>
+
+<!-- SYNC:FEATURES:END -->
+
+---
 
 <!-- SYNC:FEATURES:END -->
 
