@@ -117,7 +117,7 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 | **STT (Transcripción)** | 0 min | 120 min/mes | 600 min/mes |
 | **Mock Interviews** | 0 | 10 sesiones/mes | 50 sesiones/mes |
 | **Auto-Apply** | 0 | 50 aplicaciones/mes | 300 aplicaciones/mes |
-| **Equipos Activos** | 1 | 1 | 3 (LIFETIME: 100) |
+| **Equipos Activos** | 1 | 1 | 3 (LIFETIME: 5 + Fair Use Policy) |
 | **TheirStack API** | No | Básico (5/cons) | Pro (50/cons) |
 | **Búsqueda (Resultados)** | 100 | 100 | 200 |
 | **Stealth Suite** | No | Básico | Completo (Win32 + Capturas) |
@@ -145,7 +145,7 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 *   **Cards de Contenido y Tablas Premium:** Tablas de comparación con bordes suavizados (`rounded-3xl`), resplandor trasero dinámico (`glow backdrop`) y tarjetas modulares de soporte con colores de contraste balanceados.
 *   **Internacionalización & UX:** Traducción total al español y enrutado SPA optimizado mediante componentes `<Link>` nativos.
 *   **Auth con Clerk Personalizado:** Registro e inicio de sesión integrados con Clerk. Interfaz de usuario adaptada a modo oscuro (menús y popovers con visibilidad corregida).
-*   **Landing enfocada a Conversión:** Sección de precios actualizada con los límites reales (50 Auto-Applies en Pro, Ilimitado en Premium) y llamada a la acción directa para el Trial de 3 días.
+*   **Landing enfocada a Conversión:** Sección de precios actualizada con los límites reales (50 Auto-Applies en Pro, 300 en Premium) y llamada a la acción directa para el Trial de 3 días.
 *   **Logo e Identidad:** Restauración y preservación del logo original de Epsylon en toda la plataforma.
 *   **Descarga del instalador Windows:** Desde el panel `/app`, enlace a `/api/download` solo para usuarios Clerk con suscripción `active` o `trial`; el servidor valida contra el API y rechaza placeholders o instaladores corruptos (tamaño mínimo).
 *   **Contraseña del escritorio desde la web:** En el panel se puede fijar la contraseña del API usada en el login del Tauri (independiente de Clerk), vía proxy autenticado hacia `POST /auth/desktop-password`.
@@ -184,6 +184,10 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
     <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
   </p>
 </details>
+
+<!-- SYNC:FEATURES:END -->
+
+---
 
 <!-- SYNC:FEATURES:END -->
 
