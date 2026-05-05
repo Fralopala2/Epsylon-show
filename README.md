@@ -202,6 +202,10 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 ---
 
 <!-- SYNC:FEATURES:END -->
+
+---
+
+<!-- SYNC:FEATURES:END -->
 <details>
   <summary>Ver infografia del proyecto</summary>
   <br />
