@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-1.0.1-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.0.2-blue?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/badge/Status-Complete-green?style=for-the-badge" alt="Status">
   <img src="https://img.shields.io/badge/License-All%20Rights%20Reserved-red?style=for-the-badge" alt="License">
   <img src="https://img.shields.io/badge/Billing-Stripe-635BFF?style=for-the-badge" alt="Billing">
@@ -173,23 +173,9 @@ Combina la potencia de la automatización en la búsqueda de empleo, con la asis
 *   **Tests Unitarios e Integración:** Suite de pruebas automatizada para componentes críticos, utilidades y servicios del backend, garantizando estabilidad ante cambios.
 *   **CI/CD Automatizado:** Pipeline en GitHub Actions configurado para compilar y publicar releases (Tauri y Backend) de forma inteligente (bajo demanda o por tags) ahorrando minutos de ejecución.
 
----
-
 <!-- SYNC:FEATURES:END -->
 
-## 🖼️ Infografia del Proyecto
-
-<details>
-  <summary>Ver infografia del proyecto</summary>
-  <br />
-  <p align="center">
-    <img src="./assets/infografia.png" alt="Infografia del proyecto Epsylon" width="100%">
-  </p>
-</details>
-
 ---
-
-<!-- SYNC:FEATURES:END -->
 
 ## 🖼️ Infografia del Proyecto
 
