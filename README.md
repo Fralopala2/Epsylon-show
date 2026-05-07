@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-1.0.3-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.0.5-blue?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/badge/Status-Complete-green?style=for-the-badge" alt="Status">
   <img src="https://img.shields.io/badge/License-All%20Rights%20Reserved-red?style=for-the-badge" alt="License">
   <img src="https://img.shields.io/badge/Billing-Stripe-635BFF?style=for-the-badge" alt="Billing">
@@ -19,8 +19,6 @@
     <img src="https://img.shields.io/badge/IMPORTANTE-Leer%20instrucciones%20completas-ff6a00?style=for-the-badge" alt="Leer instrucciones en INFORMACION.md">
   </a>
 </p>
-
-> Acceso directo a instrucciones: [docs/INFORMACION.md](./docs/INFORMACION.md)
 
 ---
 
