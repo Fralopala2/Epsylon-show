@@ -50,6 +50,36 @@ Puedes personalizarlos en la pestaña **Ajustes**. Por defecto son:
 - `Ctrl + Shift + H`: Activar/Desactivar Modo Stealth (Invisible).
 - `← / →`: Navegar entre bloques de sugerencias de la IA.
 
+### Vincular Teleprompter con Telegram
+Sigue estos pasos para recibir contenido del Teleprompter por Telegram:
+
+1. **Crea tu bot en Telegram**
+   - Abre Telegram y busca `@BotFather`.
+   - Ejecuta `/newbot` y sigue el asistente.
+   - Guarda el **token** que te entrega (formato similar a `123456:ABC...`).
+
+2. **Obtén tu Chat ID**
+   - Busca tu bot recién creado y pulsa **Start** para iniciar conversación.
+   - En el navegador, abre:
+     - `https://api.telegram.org/bot<TU_TOKEN>/getUpdates`
+   - En la respuesta JSON, localiza el campo `chat.id` y cópialo.
+   - Si no aparece nada, envía primero un mensaje al bot y vuelve a abrir el enlace.
+
+3. **Configura Telegram en Epsylon Desktop**
+   - Abre la app de escritorio y entra en **Ajustes**.
+   - Ve a la sección **Telegram / Teleprompter**.
+   - Pega:
+     - **Bot Token** = token generado por BotFather.
+     - **Chat ID** = id del chat obtenido en `getUpdates`.
+   - Guarda los cambios.
+
+4. **Haz una prueba de conexión**
+   - Usa el botón **Probar conexión** (si está disponible en Ajustes).
+   - Si no existe botón de prueba, lanza un envío de prueba desde el Teleprompter.
+   - Verifica en Telegram que llega el mensaje correctamente.
+
+> Recomendación: no compartas tu Bot Token. Si se filtra, revócalo desde `@BotFather` con `/revoke` y genera uno nuevo.
+
 ---
 
 ## 🛠 Troubleshooting (Solución de problemas)
@@ -86,7 +116,7 @@ Puedes personalizarlos en la pestaña **Ajustes**. Por defecto son:
 ## 🔐 Seguridad y Privacidad en Windows
 
 ### Aviso de SmartScreen / "Windows protegió su PC"
-Al no estar firmada con un certificado de desarrollador comercial (Authenticode), Windows puede mostrar este aviso. 
+Al no estar firmada (por ahora) con un certificado de desarrollador comercial (Authenticode), Windows puede mostrar este aviso. 
 * **Solución**: Haz clic en `"Más información"` y luego en `"Ejecutar de todas formas"`. **Solo lo pedirá la primera vez**.
 
 ### Indetectabilidad (Stealth Suite)
